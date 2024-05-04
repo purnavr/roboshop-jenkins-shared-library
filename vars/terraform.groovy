@@ -4,18 +4,17 @@ def call() {
 
     stages {
 
-      stage("init") {
-        stpes {
-          sh "terraform init -backend-config=env-dev/state.tfvars"
-        }
-      }
-
-      stage("apply") {
+      stage('init') {
         steps {
-          sh "terraform apply -auto-approve -var-file=env-dev/main.tfvars"
+          sh 'terraform init -backend-config=env-dev/state.tfvars'
         }
       }
 
+      stage('apply') {
+        steps {
+          sh 'terraform apply -auto-approve -var-file=env-dev/main.tfvars'
+        }
+      }
     }
   }
 }
