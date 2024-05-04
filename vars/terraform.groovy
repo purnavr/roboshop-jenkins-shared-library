@@ -2,17 +2,26 @@ def call() {
   pipeline {
     agent any
 
+    parameters {
+      string(name: 'ENV', defaultValue: '', description: 'which env')
+    }
+
+    options {
+      ansiColor('xterm')
+    }
+
     stages {
 
       stage('init') {
         steps {
-          sh 'terraform init -backend-config=env-dev/state.tfvars'
+          sh 'terraform init -backend-config=env-${ENV}/state.tfvars'
         }
       }
 
       stage('apply') {
         steps {
-          sh 'terraform apply -auto-approve -var-file=env-dev/main.tfvars'
+//          sh 'terraform apply -auto-approve -var-file=env-dev/main.tfvars'
+          sh 'echo'
         }
       }
     }
