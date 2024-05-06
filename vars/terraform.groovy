@@ -4,6 +4,7 @@ def call() {
 
     parameters {
       string(name: 'ENV', defaultValue: '', description: 'which env')
+      string(name: 'ACTION', defaultValue: '', description: 'which action')
     }
 
     options {
@@ -20,7 +21,7 @@ def call() {
 
       stage('apply') {
         steps {
-//          sh 'terraform apply -auto-approve -var-file=env-dev/main.tfvars'
+//          sh 'terraform ${ACTION} -auto-approve -var-file=env-dev/main.tfvars'
           sh 'echo'
         }
       }
