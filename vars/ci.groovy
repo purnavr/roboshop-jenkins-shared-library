@@ -6,7 +6,13 @@ def call() {
 
       stage('compile/build') {
         steps {
-          echo 'compile'
+          if (app_lang == 'nodejs') {
+            sh 'install npm'
+          }
+          if (app_lang == 'maven') {
+            sh 'mvn package'
+          }
+
         }
 
       }
