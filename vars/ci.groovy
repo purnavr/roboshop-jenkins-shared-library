@@ -6,15 +6,15 @@ def call() {
 
       stage('compile/build') {
         steps {
-          if (app_lang == 'nodejs') {
-            sh 'install npm'
+          script {
+            if (app_lang == 'nodejs') {
+              sh 'install npm'
+            }
+            if (app_lang == 'maven') {
+              sh 'mvn package'
+            }
           }
-          if (app_lang == 'maven') {
-            sh 'mvn package'
-          }
-
         }
-
       }
 
       stage('test cases') {
