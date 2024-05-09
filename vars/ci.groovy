@@ -10,7 +10,7 @@ def call() {
       stage('compile/build') {
         steps {
           script {
-            withAWSParameterStore(credentialsId: 'PARAM', naming: 'absolute', path: '/sonarqube/user', recursive: false, regionName: 'us-east-1') {
+            withAWSParameterStore(credentialsId: 'PARAM', naming: 'absolute', path: '/sonarqube/user', recursive: true, regionName: 'us-east-1') {
               sh 'env'
               sh 'exit 1'
             }
