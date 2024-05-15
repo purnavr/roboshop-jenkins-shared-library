@@ -12,7 +12,7 @@ def testcases() {
 //  maven test
 //  python -m unittests
 //  go test
-//  sh 'echo OK'
+  sh 'echo OK'
 }
 
 
