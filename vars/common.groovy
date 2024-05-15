@@ -22,7 +22,7 @@ def compile() {
 //}
 
 def codequality() {
-  sh 'sonar-scanner -Dsonar.host.url=http://172.31.80.191:9000 -Dsonar.login=${SONARQUBE_USER} -Dsonar.password=${SONARQUBE_PASS} -Dsonar.projectKey=${component} -Dsonar.qualitygate.wait=true'
+  sh 'sonar-scanner -Dsonar.host.url=http://172.31.80.191:9000 -Dsonar.login=admin -Dsonar.password=admin123 -Dsonar.projectKey=${component} -Dsonar.qualitygate.wait=true'
 }
 
 
