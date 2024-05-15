@@ -7,13 +7,13 @@ def compile() {
   }
 }
 
-def testcases() {
+//def testcases() {
 //  npm test
 //  maven test
 //  python -m unittests
 //  go test
-  sh 'echo OK'
-}
+//  sh 'echo OK'
+//}
 
 def codequality() {
   withAWSParameterStore(credentialsId: 'PARAM1', naming: 'absolute', path: '/sonarqube', recursive: true, regionName: 'us-east-1') {
