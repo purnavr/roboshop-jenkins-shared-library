@@ -15,10 +15,14 @@ def compile() {
 //  sh 'echo OK'
 //}
 
+//def codequality() {
+//  withAWSParameterStore(credentialsId: 'PARAM1', naming: 'absolute', path: '/sonarqube', recursive: true, regionName: 'us-east-1') {
+//    sh 'sonar-scanner -Dsonar.host.url=http://172.31.80.191:9000 -Dsonar.login=${SONARQUBE_USER} -Dsonar.password=${SONARQUBE_PASS} -Dsonar.projectKey=${component} -Dsonar.qualitygate.wait=true -Dsonar.sourceEncoding=utf-8'
+//  }
+//}
+
 def codequality() {
-  withAWSParameterStore(credentialsId: 'PARAM1', naming: 'absolute', path: '/sonarqube', recursive: true, regionName: 'us-east-1') {
-    sh 'sonar-scanner -Dsonar.host.url=http://172.31.80.191:9000 -Dsonar.login=${SONARQUBE_USER} -Dsonar.password=${SONARQUBE_PASS} -Dsonar.projectKey=${component} -Dsonar.qualitygate.wait=true -Dsonar.sourceEncoding=utf-8'
-  }
+  sh 'sonar-scanner -Dsonar.host.url=http://172.31.80.191:9000 -Dsonar.login=${SONARQUBE_USER} -Dsonar.password=${SONARQUBE_PASS} -Dsonar.projectKey=${component} -Dsonar.qualitygate.wait=true'
 }
 
 
