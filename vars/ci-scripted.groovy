@@ -6,6 +6,7 @@ def call() {
 
     try {
       stage('compile/build') {
+        sh 'env'
         common.compile()
       }
 
