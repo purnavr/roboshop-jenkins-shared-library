@@ -7,11 +7,11 @@ def call() {
     try {
 
       stage('check out code') {
-        sh 'ls-l'
+        sh 'ls -l'
         cleanWs()
-        sh 'ls-l'
+        sh 'ls -l'
         git branch: 'main', url: 'https://github.com/purnavr/cart.git'
-        sh 'ls-l'
+        sh 'ls -l'
       }
 
       stage('compile/build') {
