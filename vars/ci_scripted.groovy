@@ -8,7 +8,7 @@ def call() {
 
       stage('check out code') {
         sh 'ls -l'
-        cleanWs()
+        cleanws()
         sh 'ls -l'
         git branch: 'main', url: 'https://github.com/purnavr/cart.git'
         sh 'ls -l'
