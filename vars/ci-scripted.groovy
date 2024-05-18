@@ -5,6 +5,11 @@ def call() {
   node('workstation') {
 
     try {
+
+      stage('check out code') {
+        sh 'cleanws()'
+      }
+
       stage('compile/build') {
         sh 'env'
         common.compile()
