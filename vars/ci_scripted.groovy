@@ -11,7 +11,6 @@ def call() {
   node('workstation') {
 
     try {
-
       stage('check out code') {
         cleanWs()
         git branch: 'main', url: 'https://github.com/purnavr/cart.git'
@@ -24,12 +23,6 @@ def call() {
           common.compile()
         }
       }
-
-//      if (env.TAG_NAME != ".*" && env.BRANCH_NAME != "main") {
-//        stage('test cases') {
-//          common.testcases()
-//        }
-//      }
 
       if (env.GTAG != "true" && env.BRANCH_NAME != "main") {
         stage('test cases') {
@@ -47,3 +40,10 @@ def call() {
   }
 }
 
+
+
+//      if (env.TAG_NAME != ".*" && env.BRANCH_NAME != "main") {
+//        stage('test cases') {
+//          common.testcases()
+//        }
+//      }
