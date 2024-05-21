@@ -4,7 +4,7 @@ def call() {
   }
 
   if (env.TAG_NAME ==~ ".*") {
-    env.GTAG = "true"
+    env.STAG = "true"
   } else {
     env.GTAG = "false"
   }
@@ -24,7 +24,7 @@ def call() {
         }
       }
 
-      if (env.GTAG != "true" && env.BRANCH_NAME != "main") {
+      if (env.STAG != "true" && env.BRANCH_NAME != "main") {
         stage('test cases') {
           common.testcases()
         }
