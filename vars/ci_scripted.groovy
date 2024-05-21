@@ -29,7 +29,7 @@ def call() {
 //        }
 //      }
 
-      if (env.GTAG == "true") {
+      if (env.GTAG != "true") {
         stage('test cases') {
           common.testcases()
         }
