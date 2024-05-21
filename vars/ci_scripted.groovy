@@ -41,6 +41,15 @@ def call() {
         }
       }
 
+      if (env.STAG != "true") {
+        stage('package') {
+          common.testcases()
+        }
+        stage('Artifact Upload') {
+          common.testcases()
+        }
+      }
+
     } catch (e) {
       mail body: "<h1>${component} - Pipeline Failed \n ${BUILD_URL}</h1>", from: 'friendscreations634@gmail.com', mimeType: 'text/html', subject: "${component} - Pipeline Failed", to: 'friendscreations634@gmail.com'
     }
