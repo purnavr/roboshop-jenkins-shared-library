@@ -3,11 +3,11 @@ def call() {
     env.sonar_extra_opts =""
   }
 
-  if (env.GTAG_NAME ==~ ".*") {
-    env.GTAG = "true"
-  } else {
-    env.GTAG = "false"
-  }
+//  if (env.GTAG_NAME ==~ ".*") {
+//    env.GTAG = "true"
+//  } else {
+//    env.GTAG = "false"
+//  }
   node('workstation') {
 
     try {
@@ -25,17 +25,17 @@ def call() {
         }
       }
 
-//      if (env.TAG_NAME == ".*") {
-//        stage('test cases') {
-//          common.testcases()
-//        }
-//      }
-
-      if (env.GTAG != "true" && env.BRANCH_NAME != "main") {
+      if (env.TAG_NAME == ".*" && env.BRANCH_NAME != "main") {
         stage('test cases') {
           common.testcases()
         }
       }
+
+//      if (env.GTAG != "true" && env.BRANCH_NAME != "main") {
+//        stage('test cases') {
+//          common.testcases()
+//        }
+//      }
 
       stage('code quality') {
         common.codequality()
