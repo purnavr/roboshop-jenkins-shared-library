@@ -6,7 +6,7 @@ def call() {
   if (env.TAG_NAME ==~ ".*") {
     env.STAG = "true"
   } else {
-    env.GTAG = "false"
+    env.STAG = "false"
   }
   node('workstation') {
 
