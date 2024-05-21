@@ -41,7 +41,7 @@ def call() {
         }
       }
 
-      if (env.STAG != "true") {
+      if (env.STAG == "true") {
         stage('package') {
           common.testcases()
         }
