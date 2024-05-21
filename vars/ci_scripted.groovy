@@ -19,7 +19,7 @@ def call() {
         }
       }
 
-      if (env.TAG_NAME) {
+      if (env.TAG_NAME != "NULL") {
         stage('test cases') {
           common.testcases()
         }
