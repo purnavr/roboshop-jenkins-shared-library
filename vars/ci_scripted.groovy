@@ -5,6 +5,8 @@ def call() {
 
   if (env.GTAG_NAME ==~ ".*") {
     env.GTAG = "true"
+  } else {
+    env.GTAG = "false"
   }
   node('workstation') {
 
@@ -29,7 +31,7 @@ def call() {
 //        }
 //      }
 
-      if (env.GTAG != "true") {
+      if (env.GTAG != "true" && env.BRANCH_NAME != "main") {
         stage('test cases') {
           common.testcases()
         }
