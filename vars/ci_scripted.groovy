@@ -25,7 +25,7 @@ def call() {
         }
       }
 
-      if (env.TAG_NAME == ".*" && env.BRANCH_NAME != "main") {
+      if (env.TAG_NAME != ".*" && env.BRANCH_NAME != "main") {
         stage('test cases') {
           common.testcases()
         }
