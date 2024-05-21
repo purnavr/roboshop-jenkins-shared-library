@@ -1,3 +1,5 @@
+import org.codehaus.groovy.tools.groovydoc.SimpleGroovyTag
+
 def call() {
   if (!env.sonar_extra_opts) {
     env.sonar_extra_opts =""
@@ -23,6 +25,9 @@ def call() {
           common.compile()
         }
       }
+
+      println STAG
+      println BRANCH_NAME
 
       if (env.STAG != "true" && env.BRANCH_NAME != "main") {
         stage('test cases') {
