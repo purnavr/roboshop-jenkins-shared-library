@@ -3,7 +3,7 @@ def call() {
     env.sonar_extra_opts =""
   }
 
-  if (env.GTAG_NAME ==~ ".*") {
+  if (env.GTAG_NAME == ".*") {
     env.GTAG = "true"
   }
   node('workstation') {
