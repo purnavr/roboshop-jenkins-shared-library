@@ -43,7 +43,7 @@ def call() {
 
       if (env.STAG == "true") {
         stage('package') {
-          common.testcases()
+          common.prepareArtifacts()
         }
         stage('Artifact Upload') {
           common.testcases()
