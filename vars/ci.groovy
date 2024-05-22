@@ -1,43 +1,66 @@
+import org.codehaus.groovy.tools.groovydoc.SimpleGroovyTag
+
 def call() {
   if (!env.sonar_extra_opts) {
     env.sonar_extra_opts =""
   }
-  pipeline {
-    agent any
 
-    stages {
+  if (env.TAG_NAME ==~ ".*") {
+    env.STAG = "true"
+  } else {
+    env.STAG = "false"
+  }
+  node('workstation') {
 
-      stage('compile/build') {
-        steps {
-          script {
-            common.compile()
-          }
+    try {
+      stage('check out code') {
+        cleanWs()
+        git branch: 'main', url: 'https://github.com/purnavr/cart.git'
+      }
+
+      sh 'env'
+
+      if (env.BRANCH_NAME != "main") {
+        stage('compile/build') {
+          common.compile()
         }
       }
 
-      stage('test cases') {
-        steps {
-          script {
-            common.testcases()
-          }
+      println STAG
+      println BRANCH_NAME
+
+      if (env.STAG != "true" && env.BRANCH_NAME != "main") {
+        stage('test cases') {
+          common.testcases()
         }
       }
 
-      stage('code quality') {
-        steps {
-          script {
-            common.codequality()
-          }
+      if (BRANCH_NAME ==~ "PR-.*"){
+        stage('code quality') {
+          common.codequality()
         }
       }
 
+      if (env.STAG == "true") {
+        stage('package') {
+          common.prepareArtifacts()
+        }
+        stage('Artifact Upload') {
+          common.testcases()
+        }
+      }
+
+    } catch (e) {
+      mail body: "<h1>${component} - Pipeline Failed \n ${BUILD_URL}</h1>", from: 'friendscreations634@gmail.com', mimeType: 'text/html', subject: "${component} - Pipeline Failed", to: 'friendscreations634@gmail.com'
     }
 
-    post {
-      failure {
-        mail body: "<h1>${component} - Pipeline Failed \n ${BUILD_URL}</h1>", from: 'friendscreations634@gmail.com', mimeType: 'text/html', subject: "${component} - Pipeline Failed", to: 'friendscreations634@gmail.com'
-      }
-    }
   }
 }
 
+
+
+//      if (env.TAG_NAME != ".*" && env.BRANCH_NAME != "main") {
+//        stage('test cases') {
+//          common.testcases()
+//        }
+//      }
