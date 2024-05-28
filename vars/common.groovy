@@ -25,9 +25,30 @@ def codequality() {
 
 def prepareArtifacts() {
   sh 'echo ${TAG_NAME} >VERSION'
-  if (app_lang == "nodejs" || app_lang == "angular" ) {
-    sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile.groovy'
-  }
+//  if (app_lang == "nodejs" || app_lang == "angular" ) {
+  sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile.groovy'
+//  }
+}
+
+
+def ArtifactUpload() {
+  sh 'echo ${TAG_NAME} >VERSION'
+//  if (app_lang == "nodejs" || app_lang == "angular" ) {
+  sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://172.31.90.14:8081/repository/${component}/${component}-${TAG_NAME}.zip'
+//  }
+
+}
+
+
+
+
+
+
+
+
+
+
+// old codequality
 
 //  if (app_lang == "nodejs") {
 //    sh 'zip -r ${component}-${TAG_NAME}.zip server.js node_modules VERSION'
@@ -36,14 +57,7 @@ def prepareArtifacts() {
 //  if (app_lang == "angular") {
 //    sh 'zip -r ${component}-${TAG_NAME}.zip * VERSION -x Jenkinsfile.groovy'
 //  }
-}
-
-def ArtifactUpload() {
-  sh 'echo ${TAG_NAME} >VERSION'
-  if (app_lang == "nodejs" || app_lang == "angular" ) {
-    sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://172.31.90.14:8081/repository/${component}/${component}-${TAG_NAME}.zip'
-  }
-}
+//}
 
 
 
