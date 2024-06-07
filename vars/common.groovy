@@ -38,7 +38,7 @@ def ArtifactUpload() {
   env.NEXUS_PASS = sh ( script: 'aws ssm get-parameter --name prod.nexus.pass --with-decryption --query Parameter.Value | xargs', returnStdout: true ).trim()
   wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: NEXUS_PASS, var: NEXUS_USER]]])  {
   sh 'echo ${TAG_NAME} >VERSION'
-  sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://172.31.90.14:8081/repository/${component}/${component}-${TAG_NAME}.zip'
+  sh 'curl -v -u ${NEXUS_USER}:admin123 --upload-file ${component}-${TAG_NAME}.zip http://172.31.90.14:8081/repository/${component}/${component}-${TAG_NAME}.zip'
   }
 
 }
