@@ -34,10 +34,12 @@ def prepareArtifacts() {
 
 
 def ArtifactUpload() {
+  env.NEXUS_USER = sh ( script: 'aws ssm get-parameter --name prod.nexus.user --with-decryption --query Parameter.Value | xargs', returnStdout: true ).trim()
+  env.NEXUS_PASS = sh ( script: 'aws ssm get-parameter --name prod.nexus.pass --with-decryption --query Parameter.Value | xargs', returnStdout: true ).trim()
+  wrap([$class: 'MaskPasswordsBuildWrapper', varPasswordPairs: [[password: NEXUS_PASS, var: NEXUS_USER]]])  {
   sh 'echo ${TAG_NAME} >VERSION'
-//  if (app_lang == "nodejs" || app_lang == "angular" ) {
   sh 'curl -v -u admin:admin123 --upload-file ${component}-${TAG_NAME}.zip http://172.31.90.14:8081/repository/${component}/${component}-${TAG_NAME}.zip'
-//  }
+  }
 
 }
 
@@ -64,6 +66,13 @@ def ArtifactUpload() {
 //if (app_lang == "nodejs" || app_lang == "angular" ) {
 //  sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile.groovy'
 //}
+
+//wrap([$class: 'MaskPasswordsBuildWrapper',
+////        varPasswordPairs: [[password: NEXUS_PASS],[password: NEXUS_USER]]]) {
+////    sh 'echo ${TAG_NAME} >VERSION'
+////    sh 'curl -v -u ${NEXUS_USER}:${NEXUS_PASS} --upload-file ${component}-${TAG_NAME}.zip http://172.31.11.210:8081/repository/${component}/${component}-${TAG_NAME}.zip'
+////
+////  }
 
 
 
