@@ -20,7 +20,6 @@ def call() {
           sh 'ansible-playbook -i >/tmp/servers roboshop.yml -e role_name=${component} -e env={environment}'
 
         }
-
       }
     }
 
