@@ -4,7 +4,7 @@ def call() {
 
     parameters {
       string(name: 'app_version', defaultValue: '', description: 'App Version')
-      string(name: 'component', defaultValue: '', description: 'component')
+      string(name: 'component', defaultValue: '', description: 'Component')
       string(name: 'environment', defaultValue: '', description: 'Environment')
     }
 
