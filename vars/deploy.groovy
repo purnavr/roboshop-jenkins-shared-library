@@ -82,7 +82,6 @@ def call() {
       }
       stage('Deploy Servers') {
         steps {
-          sh 'aws ec2 describe-instances --filters "Name=tag:Name,Values=${component}-${environment}" --query "Reservations[*].Instances[*].PrivateIpAddress" --output text >/tmp/servers'
           sh 'ansible-playbook -i 10.255.2.119,10.255.3.126, roboshop.yml -e role_name=${component} -e env=${environment}'
         }
       }
