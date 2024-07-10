@@ -21,7 +21,7 @@ def call() {
       stage('Deploy Servers') {
         steps {
           script {
-            sh 'aws autoscaling start-instance-refresh --auto-scaling-group-name ${component}-${environment} --preferences \'{"InstanceWarmup": 180, "MinHealthyPercentage": 0}\''
+            sh 'aws autoscaling start-instance-refresh --auto-scaling-group-name ${component}-${environment} --preferences \'{"InstanceWarmup": 180, "MinHealthyPercentage": 10}\''
           }
         }
       }
