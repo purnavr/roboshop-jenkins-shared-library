@@ -10,7 +10,7 @@ def call() {
   } else {
     env.STAG = "false"
   }
-  node('workstation') {
+  node('WS') {
 
     try {
       stage('check out code') {
