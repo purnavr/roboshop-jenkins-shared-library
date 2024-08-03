@@ -30,7 +30,7 @@ def prepareArtifacts() {
 //  } else {
 //    sh 'zip -r ${component}-${TAG_NAME}.zip * -x Jenkinsfile.groovy'
 //  }
-  'sh docker build -t 667211563329.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME} .'
+  sh 'docker build -t 667211563329.dkr.ecr.us-east-1.amazonaws.com/${component}:${TAG_NAME} .'
 }
 
 
