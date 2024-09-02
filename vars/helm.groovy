@@ -27,7 +27,7 @@ def call() {
       stage('Deploy Helm Chart') {
         steps {
           script {
-            sh 'helm upgrade -i ${component} HELM -f APP/helm/${environment}.yaml --set appversion=${app_version}'
+            sh 'helm upgrade -i ${component} HELM/ -f APP/helm/${environment}.yaml --set appversion=${app_version}'
           }
         }
       }
